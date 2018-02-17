@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    {% block head %}
+    {% endblock %}
+
+    {% block title %}
+    {% endblock %}
+</head>
+<body>
+<div class="container-fluid">
+    {% block content %}
+    {% endblock %}
+</div>
+{% block script %}
+    <script src="{% static 'jquery/jquery-3.3.1.min.js' %}"></script>
+    <scrip src="{% static 'bootstrap/js/bootstrap.min.js' %}"></scrip>
+    <script defer
+            src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+{% endblock %}
+</body>
+</html>

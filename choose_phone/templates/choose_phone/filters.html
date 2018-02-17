@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet"
+          href="{% static 'choose_phone/css/choose_phone.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-row">
+                    <h1 class="card-title">Подобрать номер</h1>
+                    <p class="card-text">Предлагаем подобрать вам
+                        уникальный, красивый
+                        номер телефона! Вы можете посмотреть все номера,
+                        представленные
+                        в
+                        интернет-магазине или воспользоваться один из
+                        способов
+                        поиска
+                        подходящего именно для вас красивого номера. Для
+                        этого
+                        воспользуйтесь предложенными алгоритмами поиска
+                        номера.</p>
+                </div>
+                <div class="card-row">
+                    <ul class="list-inline col-sm-12">
+                        <li class="list-inline-item col-sm-2">
+                            <a class="btn btn-default">
+                                <div class="btn-left_part">
+                                    <img src="{% static 'choose_phone/img/icons/mini_namednum.png' %}"
+                                         alt="">
+                                </div>
+                                <p class="btn-middle_part">Подбор по слову</p>
+                                <div class="btn-right_part">
+                                    <img src="{% static 'choose_phone/img/icons/mini_namednum.png' %}"
+                                         alt="">
+                                </div>
+                            </a>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                        <li class="list-inline-item col-sm-2">
+                            <button class="btn btn-default">Mama</button>
+                        </li>
+                    </ul>
+                </div>
+
+
+                {#                        <div class="filter_btn">#}
+                {#                                <div class="left_part">#}
+
+                {#                                </div>#}
+                {#                                <div class="middle_part">#}
+                {#                                    Подбор по слову#}
+                {#                                </div>#}
+                {#                                <div class="right_part">#}
+                {#                                    <i class="fas fa-check"></i>#}
+                {#                                </div>#}
+                {#                            </div>#}
+            </div>
+        </div>
+{% endblock %}
