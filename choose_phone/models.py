@@ -1,7 +1,7 @@
 from django.db import models
 
 class Phone(models.Model):
-    number = models.IntegerField(primary_key=True)
+    number = models.CharField(unique=True, max_length=16)
     reserved = models.BooleanField(default=False)
 
     class Meta:
