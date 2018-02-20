@@ -9,4 +9,4 @@ class Phone(models.Model):
         verbose_name_plural = "Номера телефонов"
 
     def __str__(self):
-        return self.number
+        return "({}{}{}) {}{}{}-{}{}{}{}".format(*tuple(self.number))

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet"
+          href="{% static 'choose_phone/css/filter.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">Подбор номера</h1>
+                    <p class="card-text">{{ text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>Федеральные ({{ metal_count }})</h3>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="row"><h4 class="{{ metal_class }}">{{ metal_name }}
+                                ({{ metal_count }})</h4>
+                            </div>
+                            <div class="row">
+                                <h4 class="green">0 &#8381;</h4>
+                            </div>
+                            <div class="row">
+                                <ul class="list-group">
+                                    {% for number in metal %}
+                                        <li class="list-group-item">{{ number }}
+                                            <span class="float-right">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            </span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    <hr>
+                    {#                    <div class="row">#}
+                    {#                        <div class="col-sm-12">#}
+                    {#                            <h3>Городские ({{ count_city_numbers }})</h3>#}
+                    {#                        </div>#}
+                    {#                        <div class="col-sm-2">Простые ({{ simple_numbers }})#}
+                    {#                        </div>#}
+                    {#                        <div class="col-sm-2">Серебрянные#}
+                    {#                            ({{ silver_numbers }})#}
+                    {#                        </div>#}
+                    {#                        <div class="col-sm-2">Платиновые ({{ platinum_numbers }})</div>#}
+                    {#                    </div>#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

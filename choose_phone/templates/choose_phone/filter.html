@@ -3,116 +3,94 @@
 
 {% block head %}
     <link rel="stylesheet"
-          href="{% static 'choose_phone/css/choose_phone.css' %}">
+          href="{% static 'choose_phone/css/filter.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-row">
-                    <h1 class="card-title">Подобрать номер</h1>
-                    <p class="card-text">Предлагаем подобрать вам
-                        уникальный, красивый
-                        номер телефона! Вы можете посмотреть все номера,
-                        представленные
-                        в
-                        интернет-магазине или воспользоваться один из
-                        способов
-                        поиска
-                        подходящего именно для вас красивого номера. Для
-                        этого
-                        воспользуйтесь предложенными алгоритмами поиска
-                        номера.</p>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">Подбор номера</h1>
+                    <p class="card-text">{{ text }}</p>
                 </div>
-                <div class="card-row">
-                    <ul class="list-inline">
-                        <li class="list-inline-item menu-item menu-item-first">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/mini_full.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Все номера</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/lubnum.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Любимое число</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/xvost.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Красивый хвост</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/namednum.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Подбор по слову</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/mini_datenum.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Подбор по дате</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item menu-item-first">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/mini_exceptnum.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Все кроме</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/mini_alikenum.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Похожий номер</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/mini_mchislo.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Магическое число</p>
-                            </a>
-                        </li>
-                        <li class="list-inline-item menu-item">
-                            <a href="#" class="menu-item-block">
-                                <div class="btn-left-part">
-                                    <img src="{% static 'choose_phone/img/icons/mini_masknum.png' %}"
-                                         class="btn-img">
-                                </div>
-                                <p class="btn-paragraph">Подбор по маске</p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-{#                <div class="card-row">#}
-{#                    <input type="text" value="hello"/>#}
-{#                </div>#}
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>Федеральные ({{ count_all }})</h3>
+                        </div>
+                        <div class="col-sm-3"><h4 class="simple"><a
+                                href="{% url 'filter_metal' id 'simple' %}">Простые
+                            ({{ count_simple }})</a></h4>
+                            <div class="row"><h4 class="green">0 &#8381;</h4>
+                            </div>
+                            <div class="row">
+                                <ul class="list-group">
+                                    {% for number in simple %}
+                                        <li class="list-group-item">{{ number }}
+                                            <span class="float-right">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            </span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"><h4 class="silver"><a
+                                href="{% url 'filter_metal' id 'silver' %}">Серебрянные
+                            ({{ count_silver }})</a></h4>
+                            <div class="row"><h4 class="green">500 &#8381;</h4>
+                            </div>
+                            <div class="row">
+                                <ul class="list-group">
+                                    {% for number in silver %}
+                                        <li class="list-group-item">{{ number }}
+                                            <span class="float-right">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            </span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"><h4 class="platinum"><a
+                                href="{% url 'filter_metal' id 'platinum' %}">Платиновые
+                            ({{ count_platinum }})</a></h4>
+                            <div class="row"><h4 class="green">3000 &#8381;</h4>
+                            </div>
+                            <div class="row">
+                                <ul class="list-group">
+                                    {% for number in platinum %}
+                                        <li class="list-group-item">{{ number }}
+                                            <span class="float-right">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            </span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {#                    <div class="row">#}
+                    {#                        <div class="col-sm-12">#}
+                    {#                            <h3>Городские ({{ count_city_numbers }})</h3>#}
+                    {#                        </div>#}
+                    {#                        <div class="col-sm-2">Простые ({{ simple_numbers }})#}
+                    {#                        </div>#}
+                    {#                        <div class="col-sm-2">Серебрянные#}
+                    {#                            ({{ silver_numbers }})#}
+                    {#                        </div>#}
+                    {#                        <div class="col-sm-2">Платиновые ({{ platinum_numbers }})</div>#}
+                    {#                    </div>#}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
