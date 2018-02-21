@@ -22,7 +22,8 @@
                         подходящего именно для вас красивого номера. Для этого
                         воспользуйтесь предложенными алгоритмами поиска
                         номера.</p>
-                    <a href="{% url 'filter' 1 %}" class="btn btn-green">Посмотреть все номера ({{ count }})</a>
+                    <a href="{% url 'filter' 1 %}" class="btn btn-green">Посмотреть
+                        все номера ({{ count }})</a>
                 </div>
             </div>
         </div>
@@ -36,13 +37,17 @@
                         <p class="card-text">Выберите номер, в котором
                             содержится ваше любимое число.</p>
                     </div>
-                    <form action="">
+                    <form action="{% url 'filter' 2 %}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="1">Введите до 4-х цифр</label>
-                            <input id=1 type="text" class="form-control">
+                            <input id=1 type="text" class="form-control"
+                                   name="favorite_number">
                         </div>
                         <div class="form-group">
-                            <a href="#" class="btn btn-green float-left">Подобрать</a>
+                            <button class="btn btn-green float-left"
+                                    type="submit">Подобрать
+                            </button>
                             <img src="{% static 'choose_phone/img/icons/lubnum.png' %}"
                                  class="float-right img-medium" alt="">
                         </div>
@@ -58,21 +63,31 @@
                         <p class="card-text">Подберите себе оригинальный номер
                             телефона по последним цифрам.</p>
                     </div>
-                    <form action="">
+                    <form action="{% url 'filter' 3 %}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="1" class="col-sm-12">Введите 4
                                 цифры</label>
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
+                            <input id=1 type="text" class="small-input disabled"
+                                   value="X" disabled>
+                            <input id=1 type="text" class="small-input disabled"
+                                   value="X" disabled>
+                            <input id=1 type="text" class="small-input disabled"
+                                   value="X" disabled>
                             -
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
+                            <input id=1 type="text" class="small-input"
+                                   name="tail1">
+                            <input id=1 type="text" class="small-input"
+                                   name="tail2">
+                            <input id=1 type="text" class="small-input"
+                                   name="tail3">
+                            <input id=1 type="text" class="small-input"
+                                   name="tail4">
                         </div>
                         <div class="form-group">
-                            <a href="#" class="btn btn-green float-left">Подобрать</a>
+                            <button class="btn btn-green float-left"
+                                    type="submit">Подобрать
+                            </button>
                             <img src="{% static 'choose_phone/img/icons/xvost.png' %}"
                                  class="float-right img-medium" alt="">
                         </div>
@@ -88,14 +103,17 @@
                         <p class="card-text">Номер, который легко запомнить в
                             виде имени, названия или любого слова.</p>
                     </div>
-                    <form action="">
+                    <form action="{% url 'filter' 4 %}" method="post">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="1">Введите маску:</label>
-                            <input id=1 type="text" class="form-control">
+                            <input id=1 type="text" class="form-control"
+                                   name="word">
                         </div>
                         <div class="form-group">
-                            <a href="#"
-                               class="btn btn-green float-left">Подобрать</a>
+                            <button class="btn btn-green float-left"
+                                    type="submit">Подобрать
+                            </button>
                             <img src="{% static 'choose_phone/img/icons/namednum.png' %}"
                                  class="float-right img-medium" alt="">
                         </div>
@@ -208,8 +226,9 @@
                     </div>
                     <form action="">
                         <div class="form-group">
-                            <label for="2" class="col-sm-12">Укажите дату рождения и узнайте своё
-                            магическое число:</label>
+                            <label for="2" class="col-sm-12">Укажите дату
+                                рождения и узнайте своё
+                                магическое число:</label>
                             <select name="" id="2" class="small-select">
                                 <option value="">1</option>
                             </select>
@@ -222,9 +241,9 @@
                         </div>
                         <div class="form-group">
                             <a href="#"
-                           class="btn btn-green float-left">Подобрать</a>
-                        <img src="{% static 'choose_phone/img/icons/mchislo.png' %}"
-                             class="float-right img-medium" alt="">
+                               class="btn btn-green float-left">Подобрать</a>
+                            <img src="{% static 'choose_phone/img/icons/mchislo.png' %}"
+                                 class="float-right img-medium" alt="">
                         </div>
                     </form>
                 </div>
@@ -242,7 +261,8 @@
                     </div>
                     <form action="">
                         <div class="form-group">
-                            <label for="1" class="col-sm-12">Введите маску::</label>
+                            <label for="1" class="col-sm-12">Введите
+                                маску::</label>
                             (
                             <input id=1 type="text" class="small-input">
                             <input id=1 type="text" class="small-input">
@@ -259,9 +279,9 @@
                         </div>
                         <div class="form-group">
                             <a href="#"
-                           class="btn btn-green float-left">Подобрать</a>
-                        <img src="{% static 'choose_phone/img/icons/masknum.png' %}"
-                             class="float-right img-medium" alt="">
+                               class="btn btn-green float-left">Подобрать</a>
+                            <img src="{% static 'choose_phone/img/icons/masknum.png' %}"
+                                 class="float-right img-medium" alt="">
                         </div>
                     </form>
                 </div>

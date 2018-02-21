@@ -96,6 +96,13 @@ input.form-control {
     height: 40px;
     border: 1px solid #ced4da;
     border-radius: .25rem;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-align: center;
+}
+
+.disabled {
+    color: #999
 }
 
 .small-select {
@@ -247,7 +254,7 @@ p.btn-paragraph {
     margin-left: 0;
 }
 
-/*.btn-img {*/
-/*padding: 0;*/
-/*}*/
+button {
+    margin-top: 20px;
+}
 
