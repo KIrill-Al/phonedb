@@ -25,23 +25,31 @@
                         <div class="col-sm-12">
                             <h3>Федеральные ({{ count_all }})</h3>
                         </div>
-                        <div class="col-sm-3"><h4 class="simple"><a
-                                href="{% url 'filter_metal' id 'simple' %}">Простые
-                            ({{ count_simple }})</a></h4>
-                            <div class="row"><h4 class="green">0 &#8381;</h4>
+                        {% if count_all == 0 %}
+                            <div class="col-sm-12">К сожалению номеров
+                                удовлетворяющих критериям поиска не найдено
                             </div>
-                            <div class="row">
-                                <ul class="list-group">
-                                    {% for number in simple %}
-                                        <li class="list-group-item">{{ number }}
-                                            <span class="float-right">
+                        {% endif %}
+                        {% if simple %}
+                            <div class="col-sm-3"><h4 class="simple"><a
+                                    href="{% url 'filter_metal' id 'simple' %}">Простые
+                                ({{ count_simple }})</a></h4>
+                                <div class="row"><h4 class="green">0
+                                    &#8381;</h4>
+                                </div>
+                                <div class="row">
+                                    <ul class="list-group">
+                                        {% for number in simple %}
+                                            <li class="list-group-item">{{ number }}
+                                                <span class="float-right">
                                             <i class="fas fa-shopping-cart"></i>
                                             </span>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                         {% if silver %}
                             <div class="col-sm-3"><h4 class="silver"><a
                                     href="{% url 'filter_metal' id 'silver' %}">Серебрянные

@@ -20,17 +20,25 @@ def all_numbers(request):
     return phones, text
 
 
-def favorite_number(request):
-    number = request.POST['favorite_number']
+def favorite_number(request, number=None, negative=False):
+    if not number:
+        number = request.POST['number']
     text = "Воспользовавшись данным способом, вы можете подобрать номер, в " \
            "котором содержится ваше любимое число."
     regex = r'({})'.format(number)
-    phones = Phone.objects.filter(Q(number__iregex=regex)).all()
+    if not negative:
+        phones = Phone.objects.filter(Q(number__iregex=regex)).all()
+    else:
+        phones = Phone.objects.filter(~Q(number__iregex=regex)).all()
+
     return phones, text
 
 
 def beautiful_tail(request):
-    token, number1, number2, number3, number4 = request.POST.values()
+    number1 = request.POST['tail1']
+    number2 = request.POST['tail2']
+    number3 = request.POST['tail3']
+    number4 = request.POST['tail4']
     number1 = number1 if number1 else '.'
     number2 = number2 if number2 else '.'
     number3 = number3 if number3 else '.'
@@ -41,26 +49,27 @@ def beautiful_tail(request):
            "цифра в каком-то поле не имеет для вас значения, оставьте поле " \
            "свободным. Укажите от одной до четырех цифр в окончании номера:"
     phones = Phone.objects.filter(Q(number__iregex=regex)).all()
+
     return phones, text
 
 
 def selection_by_word(request):
+    # Английский алфавит нужно?
     numpad = {2: ['а', 'б', 'в', 'г'], 3: ['д', 'e', 'ё', 'ж', 'з'],
               4: ['и', 'й', 'к', 'л'], 5: ['м', 'н', 'о', 'п'],
               6: ['р', 'с', 'т', 'у'], 7: ['ф', 'х', 'ц', 'ч'],
               8: ['ш', 'щ', 'ъ', 'ы'], 9: ['ь', 'э', 'ю', 'я']}
     word = tuple(request.POST['word'])
-    number = ' '
+    number = ''
 
     for char in word:
         for key, char_list in numpad.items():
             if char in char_list:
-                number.join(str(key))
-                print(number)
+                print(str(key))
+                number += str(key)
 
-    print('this is number: {}'.format(number))
+    phone, text = favorite_number(request, number)
 
-    regex = ''
     text = "Этот способ подбора поможет вам найти номер, который легко " \
            "запомнить в виде имени, названия или любого слова, подставляя " \
            "вместо цифр - буквы, расположенные на клавишах телефона " \
@@ -68,11 +77,61 @@ def selection_by_word(request):
            "пример справа). Например, набрав на клавиатуре телефона «МегаФон», " \
            "вы увидите номер 532-27-55. Удобно запоминать и сочетания букв и " \
            "цифр, например: 1-ТАКСИ-1 (1-62464-1)."
+
+    return phone, text
+
+
+def selection_by_date(request):
+    pass
+
+
+def all_except_number(request):
+    phone, text = favorite_number(request, negative=True)
+    text = 'Европейцы избегают числа «13», японцы — «4», а у вас есть нелюбимая ' \
+           'цифра или число? Введите его в форму и уберите из списка все номера, ' \
+           'содержащие неприятные комбинации.'
+
+    return phone, text
+
+
+def similar_number(request):
+    number1 = request.POST['number1']
+    number2 = request.POST['number2']
+    number3 = request.POST['number3']
+    number4 = request.POST['number4']
+    number5 = request.POST['number5']
+    number6 = request.POST['number6']
+    number7 = request.POST['number7']
+    number1 = number1 if number1 else '.'
+    number2 = number2 if number2 else '.'
+    number3 = number3 if number3 else '.'
+    number4 = number4 if number4 else '.'
+    number5 = number5 if number5 else '.'
+    number6 = number6 if number6 else '.'
+    number7 = number7 if number7 else '.'
+    regex = r'{}{}{}{}{}{}{}$'.format(number1, number2, number3, number4,
+                                      number5, number6, number7)
+    text = "Этот способ поможет вам подобрать один или несколько номеров, " \
+           "похожих на тот, который вы укажете. Подобранные номера могут " \
+           "содержать те же цифры, расположенные в другом порядке или отличаться " \
+           "на несколько знаков. Впишите в поля семь цифр номера."
+    phones = Phone.objects.filter(Q(number__iregex=regex)).all()
+
+    return phones, text
+
+
+def magic_number(request):
+    pass
+
+
+def mask(request):
     pass
 
 
 FILTERS_DICT = {1: all_numbers, 2: favorite_number, 3: beautiful_tail,
-                4: selection_by_word}
+                4: selection_by_word, 5: selection_by_date,
+                6: all_except_number, 7: similar_number, 8: magic_number,
+                9: mask}
 
 
 def filter(request, id, metal_name=None):
