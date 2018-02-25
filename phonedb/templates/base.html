@@ -19,11 +19,12 @@
     {% block content %}
     {% endblock %}
 </div>
+
+<script src="{% static 'jquery/jquery-3.3.1.min.js' %}"></script>
+<scrip src="{% static 'bootstrap/js/bootstrap.min.js' %}"></scrip>
+<script defer
+        src="{% static 'fontawesome/on-server/js/fontawesome-all.min.js' %}"></script>
 {% block script %}
-    <script src="{% static 'jquery/jquery-3.3.1.min.js' %}"></script>
-    <scrip src="{% static 'bootstrap/js/bootstrap.min.js' %}"></scrip>
-    <script defer
-            src="{% static 'fontawesome/on-server/js/fontawesome-all.min.js' %}"></script>
 {% endblock %}
 </body>
 </html>

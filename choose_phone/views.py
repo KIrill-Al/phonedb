@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render
 
+from choose_phone.forms import FavoriteNumberForm
 from choose_phone.models import Phone
 
 METAL_DICT = {'simple': 'Простые', 'silver': 'Серебрянные',
@@ -10,7 +11,8 @@ METAL_DICT = {'simple': 'Простые', 'silver': 'Серебрянные',
 def index(request):
     count = Phone.objects.all().count()
     template = 'choose_phone/index.html'
-    context = {'count': count}
+    favorite_number_form = FavoriteNumberForm()
+    context = {'count': count, 'favorite_number_form': favorite_number_form}
     return render(request, template, context)
 
 
@@ -133,8 +135,17 @@ FILTERS_DICT = {1: all_numbers, 2: favorite_number, 3: beautiful_tail,
                 6: all_except_number, 7: similar_number, 8: magic_number,
                 9: mask}
 
+FORMS_DICT = {2: FavoriteNumberForm}
 
 def filter(request, id, metal_name=None):
+    print(request.POST)
+    if id > 1:
+        form = FORMS_DICT[id](request.POST)
+        if not form.is_valid():
+            print("Errors: {}".format(form.errors))
+        else:
+            print("form is valid")
+
     filter = FILTERS_DICT[id]
     phones, text = filter(request)
     count_all = phones.count()
