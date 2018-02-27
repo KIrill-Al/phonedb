@@ -30,283 +30,32 @@
     </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Любимое число</h4>
-                        <p class="card-text">Выберите номер, в котором
-                            содержится ваше любимое число.</p>
-                    </div>
-                    <form action="{% url 'filter' 2 %}" method="post"
-                          id="filter2">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            {#                            <label for="1">Введите до 4-х цифр</label>#}
-                            <label class="col-sm-12">{{ favorite_number_form.number.label }}</label>
-                            {{ favorite_number_form.number }}
-                            {{ favorite_number_form.number.errors }}
-                            {#                            <input id=1 type="text" class="form-control"#}
-                            {#                                   name="number">#}
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-green float-left"
-                                    type="submit">Подобрать
-                            </button>
-                            <img src="{% static 'choose_phone/img/icons/lubnum.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/favorite_number.html' %}
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Красивый хвост</h4>
-                        <p class="card-text">Подберите себе оригинальный номер
-                            телефона по последним цифрам.</p>
-                    </div>
-                    <form action="{% url 'filter' 3 %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="1" class="col-sm-12">Введите 4
-                                цифры</label>
-                            <input id=1 type="text" class="small-input disabled"
-                                   value="X" disabled>
-                            <input id=1 type="text" class="small-input disabled"
-                                   value="X" disabled>
-                            <input id=1 type="text" class="small-input disabled"
-                                   value="X" disabled>
-                            -
-                            <input id=1 type="text" class="small-input"
-                                   name="tail1">
-                            <input id=1 type="text" class="small-input"
-                                   name="tail2">
-                            <input id=1 type="text" class="small-input"
-                                   name="tail3">
-                            <input id=1 type="text" class="small-input"
-                                   name="tail4">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-green float-left"
-                                    type="submit">Подобрать
-                            </button>
-                            <img src="{% static 'choose_phone/img/icons/xvost.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/beautifull_tail.html' %}
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Подбор по слову</h4>
-                        <p class="card-text">Номер, который легко запомнить в
-                            виде имени, названия или любого слова.</p>
-                    </div>
-                    <form action="{% url 'filter' 4 %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="1">Введите маску:</label>
-                            <input id=1 type="text" class="form-control"
-                                   name="word">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-green float-left"
-                                    type="submit">Подобрать
-                            </button>
-                            <img src="{% static 'choose_phone/img/icons/namednum.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/selection_by_word.html' %}
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Подбор по дате</h4>
-                        <p class="card-text">Номер, содержащий цифры важной для
-                            вас даты, например, дня рождения или свадьбы.</p>
-                    </div>
-                    <form action="">
-                        <div class="form-group">
-                            <label for="2" class="col-sm-12">Введите
-                                дату:</label>
-                            <select name="" id="2" class="small-select">
-                                <option value="">1</option>
-                            </select>
-                            <select name="" id="1"
-                                    class="small-select"></select>
-                            <select name="" id="1"
-                                    class="small-select"></select>
-                        </div>
-                        <div class="form-group">
-                            <a href="#"
-                               class="btn btn-green float-left">Подобрать</a>
-                            <img src="{% static 'choose_phone/img/icons/datenum.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/selection_by_date.html' %}
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Все кроме</h4>
-                        <p class="card-text">Исключите из поиска номера, которые
-                            содержат определенное число или цифру.</p>
-                    </div>
-
-                    <form action="{% url 'filter' 6 %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="2" class="col-sm-12">Введите до 4
-                                цифр:</label>
-                            <input id=1 type="text" class="form-control"
-                                   name="number">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-green float-left"
-                                    type="submit">Подобрать
-                            </button>
-                            <img src="{% static 'choose_phone/img/icons/exceptnum.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/all_except_number.html' %}
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Похожий номер</h4>
-                        <p class="card-text">Введите свой номер телефона и
-                            подберите похожие номера для родных и близких.</p>
-                    </div>
-                    <form action="{% url 'filter' 7 %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="1" class="col-sm-12">Введите семь цифр
-                                номера:</label>
-                            (
-
-                            <input id=1 type="text" class="small-input disabled"
-                                   value="X" disabled>
-                            <input id=1 type="text" class="small-input disabled"
-                                   value="X" disabled>
-                            <input id=1 type="text" class="small-input disabled"
-                                   value="X" disabled>
-                            )
-                            <input id=1 type="text" class="small-input"
-                                   name="number1">
-                            <input id=1 type="text" class="small-input"
-                                   name="number2">
-                            <input id=1 type="text" class="small-input"
-                                   name="number3">
-                            -
-                            <input id=1 type="text" class="small-input"
-                                   name="number4">
-                            <input id=1 type="text" class="small-input"
-                                   name="number5">
-                            <input id=1 type="text" class="small-input"
-                                   name="number6">
-                            <input id=1 type="text" class="small-input"
-                                   name="number7">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-green float-left"
-                                    type="submit">Подобрать
-                            </button>
-                            <img src="{% static 'choose_phone/img/icons/alikenum.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/all_except_number.html' %}
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Магическое число</h4>
-                        <p class="card-text">Узнайте свое магическое число по
-                            дате рождения и подберите телефонный номер,
-                            основываясь на принципах науки нумерологии.</p>
-                    </div>
-                    <form action="">
-                        <div class="form-group">
-                            <label for="2" class="col-sm-12">Укажите дату
-                                рождения и узнайте своё
-                                магическое число:</label>
-                            <select name="" id="2" class="small-select">
-                                <option value="">1</option>
-                            </select>
-                            <select name="" id="1"
-                                    class="small-select"></select>
-                            <select name="" id="1"
-                                    class="small-select"></select>
-                            =
-                            <input id=1 type="text" class="small-input">
-                        </div>
-                        <div class="form-group">
-                            <a href="#"
-                               class="btn btn-green float-left">Подобрать</a>
-                            <img src="{% static 'choose_phone/img/icons/mchislo.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/magic_number.html' %}
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-row">
-                        <h4 class="card-title">Подбор по маске</h4>
-                        <p class="card-text">Придумайте свой красивый номер,
-                            указав его маску в виде латинских букв
-                            (A-B-C-D-E-F-G) или цифр от 0 до 9. Пример: маске
-                            AАА-12-BA соответствует номер 333-12-43.</p>
-                    </div>
-                    <form action="">
-                        <div class="form-group">
-                            <label for="1" class="col-sm-12">Введите
-                                маску::</label>
-                            (
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            )
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            -
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                            <input id=1 type="text" class="small-input">
-                        </div>
-                        <div class="form-group">
-                            <a href="#"
-                               class="btn btn-green float-left">Подобрать</a>
-                            <img src="{% static 'choose_phone/img/icons/masknum.png' %}"
-                                 class="float-right img-medium" alt="">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            {% include 'choose_phone/filters/card/mask.html' %}
         </div>
     </div>
 

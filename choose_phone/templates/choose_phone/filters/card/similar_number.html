@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<div class="card">
+    <div class="card-body">
+        <div class="card-row">
+            <h4 class="card-title">Похожий номер</h4>
+            <p class="card-text">Введите свой номер телефона и
+                подберите похожие номера для родных и близких.</p>
+        </div>
+        <form action="{% url 'filter' 7 %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="1" class="col-sm-12">Введите семь цифр
+                    номера:</label>
+                (
+                <input id=1 type="text" class="small-input disabled"
+                       value="X" disabled>
+                <input id=1 type="text" class="small-input disabled"
+                       value="X" disabled>
+                <input id=1 type="text" class="small-input disabled"
+                       value="X" disabled>
+                )
+                <input id=1 type="text" class="small-input"
+                       name="number1">
+                <input id=1 type="text" class="small-input"
+                       name="number2">
+                <input id=1 type="text" class="small-input"
+                       name="number3">
+                -
+                <input id=1 type="text" class="small-input"
+                       name="number4">
+                <input id=1 type="text" class="small-input"
+                       name="number5">
+                <input id=1 type="text" class="small-input"
+                       name="number6">
+                <input id=1 type="text" class="small-input"
+                       name="number7">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-green float-left"
+                        type="submit">Подобрать
+                </button>
+                <img src="{% static 'choose_phone/img/icons/alikenum.png' %}"
+                     class="float-right img-medium" alt="">
+            </div>
+        </form>
+    </div>
+</div>

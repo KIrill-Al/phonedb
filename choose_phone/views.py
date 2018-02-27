@@ -1,11 +1,14 @@
 from django.db.models import Q
 from django.shortcuts import render
 
-from choose_phone.forms import FavoriteNumberForm
+from choose_phone.forms import FavoriteNumberForm, BlankForm
 from choose_phone.models import Phone
 
 METAL_DICT = {'simple': 'Простые', 'silver': 'Серебрянные',
               'platinum': 'Платиновые'}
+FORMS_DICT = {1: BlankForm, 2: FavoriteNumberForm}
+TEMPLATES_DICT = {1: 'choose_phone/filters/inline/all.html',
+                  2: 'choose_phone/filters/inline/favorite_number.html'}
 
 
 def index(request):
@@ -22,16 +25,21 @@ def all_numbers(request):
     return phones, text
 
 
-def favorite_number(request, number=None, negative=False):
-    if not number:
-        number = request.POST['number']
+def favorite_number(request, number=None, negative=False, form=None):
+    # form = FavoriteNumberForm(request.POST)
+    # if not form.is_valid():
+    #     print('errors')
+    #     return JsonResponse({'result': 'error', 'errors': form.errors})
+
+    if form.is_valid():
+        number = form.cleaned_data['number']
     text = "Воспользовавшись данным способом, вы можете подобрать номер, в " \
            "котором содержится ваше любимое число."
     regex = r'({})'.format(number)
-    if not negative:
-        phones = Phone.objects.filter(Q(number__iregex=regex)).all()
-    else:
+    if negative:
         phones = Phone.objects.filter(~Q(number__iregex=regex)).all()
+    else:
+        phones = Phone.objects.filter(Q(number__iregex=regex)).all()
 
     return phones, text
 
@@ -41,10 +49,10 @@ def beautiful_tail(request):
     number2 = request.POST['tail2']
     number3 = request.POST['tail3']
     number4 = request.POST['tail4']
-    number1 = number1 if number1 else '.'
-    number2 = number2 if number2 else '.'
-    number3 = number3 if number3 else '.'
-    number4 = number4 if number4 else '.'
+    # number1 = number1 if number1 else '.'
+    # number2 = number2 if number2 else '.'
+    # number3 = number3 if number3 else '.'
+    # number4 = number4 if number4 else '.'
     regex = r'{}{}{}{}$'.format(number1, number2, number3, number4)
     text = "При помощи этого способа вы можете подобрать номер по последним " \
            "четырем цифрам. Вы можете ввести от одной до четырех цифр. Если " \
@@ -135,17 +143,42 @@ FILTERS_DICT = {1: all_numbers, 2: favorite_number, 3: beautiful_tail,
                 6: all_except_number, 7: similar_number, 8: magic_number,
                 9: mask}
 
-FORMS_DICT = {2: FavoriteNumberForm}
 
 def filter(request, id, metal_name=None):
-    print(request.POST)
-    if id > 1:
-        form = FORMS_DICT[id](request.POST)
-        if not form.is_valid():
-            print("Errors: {}".format(form.errors))
-        else:
-            print("form is valid")
+    form = FORMS_DICT[id](request.POST)
+    embedded_template = TEMPLATES_DICT[id]
+    template = 'choose_phone/filter.html'
+    context = {'form': form, 'embedded_template': embedded_template, 'id': id}
 
+    filter = FILTERS_DICT[id]
+    phones, text = filter(request, form=form)
+    count_all = phones.count()
+    simple = phones.filter(~Q(number__iregex=r'(\d{2,3})\1$')).filter(
+        ~Q(number__iregex=r'0{3}$'))
+    count_simple = simple.count()
+    silver = phones.filter(number__iregex=r'(\d{2,3})\1$')
+    count_silver = silver.count()
+    platinum = phones.filter(number__iregex=r'0{3}$')
+    count_platinum = platinum.count()
+    metal_dict = {'simple': simple, 'silver': silver, 'platinum': platinum}
+    if metal_name:
+        metal = metal_dict[metal_name]
+        template = 'choose_phone/filter_metal.html'
+        context = {'metal': metal, 'metal_count': metal.count(), 'text': text,
+                   'metal_name': METAL_DICT[metal_name],
+                   'metal_class': metal_name}
+    else:
+        context = {'simple': simple, 'count_simple': count_simple,
+                   'silver': silver,
+                   'count_silver': count_silver,
+                   'platinum': platinum, 'count_platinum': count_platinum,
+                   'count_all': count_all, 'text': text, 'form': form,
+                   'embedded_template': embedded_template, 'id': id}
+    print("all ok")
+    return render(request, template, context)
+
+
+def new_filter(request, id, metal_name=None):
     filter = FILTERS_DICT[id]
     phones, text = filter(request)
     count_all = phones.count()
@@ -164,7 +197,7 @@ def filter(request, id, metal_name=None):
                    'metal_class': metal_name}
         template = 'choose_phone/filter_metal.html'
     else:
-        template = 'choose_phone/filter.html'
+        template = 'choose_phone/filter_new.html'
         context = {'simple': simple, 'count_simple': count_simple,
                    'silver': silver,
                    'count_silver': count_silver,

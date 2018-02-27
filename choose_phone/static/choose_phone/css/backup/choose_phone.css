@@ -4,18 +4,11 @@ body {
 
 h1, h4 {
     color: #00b956;
-    font-family: graphiklight, helvetica, sans-serif;
 }
 
-img {
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-}
-
-label {
-    color: #999;
-}
+/*label {*/
+    /*color: #999;*/
+/*}*/
 
 a {
     margin-top: 20px;
@@ -50,6 +43,7 @@ input.form-control {
 .card-body {
     padding: 4px 20px 20px;
 }
+
 .card-row {
     margin-bottom: 15px;
     max-width: 1414px;
@@ -147,33 +141,33 @@ input.form-control {
     height: 60px;
 }
 
-.btn-img:before {
-    content: "";
-    width: 18%;
-    height: 27%;
-    position: absolute;
-    left: 10px;
-    top: 20px;
-    margin-right: 5px;
-    vertical-align: text-top;
-    background-color: transparent;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
+/*.btn-img:before {*/
+/*content: "";*/
+/*width: 18%;*/
+/*height: 27%;*/
+/*position: absolute;*/
+/*left: 10px;*/
+/*top: 20px;*/
+/*margin-right: 5px;*/
+/*vertical-align: text-top;*/
+/*background-color: transparent;*/
+/*background-position: center center;*/
+/*background-repeat: no-repeat;*/
+/*}*/
 
-.btn-img:after {
-    content: "\2705";
-    color: #00b956;
-    position: absolute;
-    right: 7px;
-    top: 7px;
-    font-size: 14px;
-    margin-right: 5px;
-    vertical-align: text-top;
-    background-color: transparent;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
+/*.btn-img:after {*/
+/*content: "\2705";*/
+/*color: #00b956;*/
+/*position: absolute;*/
+/*right: 7px;*/
+/*top: 7px;*/
+/*font-size: 14px;*/
+/*margin-right: 5px;*/
+/*vertical-align: text-top;*/
+/*background-color: transparent;*/
+/*background-position: center center;*/
+/*background-repeat: no-repeat;*/
+/*}*/
 
 .img-word:before {
     background-image: url('/static/choose_phone/img/icons/mini_namednum.png');
@@ -247,7 +241,6 @@ p.btn-paragraph {
     margin-left: 0;
 }
 
-/*.btn-img {*/
-/*padding: 0;*/
-/*}*/
-
+.margin-bottom {
+    margin-top: 32px;
+}

@@ -1,0 +1,18 @@
+<form action="{% url 'filter' 2 %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <p>Воспользовавшись данным способом, вы можете подобрать номер, в
+            котором содержится ваше любимое число.</p>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <label class="col-sm-12">{{ form.number.label }}</label>
+            {{ form.number }}
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-green float-left margin-bottom"
+                    type="submit">Подобрать
+            </button>
+        </div>
+    </div>
+</form>

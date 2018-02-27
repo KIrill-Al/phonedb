@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<div class="card">
+    <div class="card-body">
+        <div class="card-row">
+            <h4 class="card-title">Магическое число</h4>
+            <p class="card-text">Узнайте свое магическое число по
+                дате рождения и подберите телефонный номер,
+                основываясь на принципах науки нумерологии.</p>
+        </div>
+        <form action="">
+            <div class="form-group">
+                <label for="2" class="col-sm-12">Укажите дату
+                    рождения и узнайте своё
+                    магическое число:</label>
+                <select name="" id="2" class="small-select">
+                    <option value="">1</option>
+                </select>
+                <select name="" id="2"
+                        class="small-select"></select>
+                <select name="" id="2"
+                        class="small-select"></select>
+                =
+                <input id="2" type="text" class="small-input">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-green float-left" type="submit">Подобрать
+                </button>
+                <img src="{% static 'choose_phone/img/icons/mchislo.png' %}"
+                     class="float-right img-medium" alt="">
+            </div>
+        </form>
+    </div>
+</div>
