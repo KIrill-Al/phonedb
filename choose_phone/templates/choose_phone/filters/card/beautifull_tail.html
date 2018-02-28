@@ -18,22 +18,16 @@
                 <input id=1 type="text" class="small-input disabled"
                        value="X" disabled>
                 -
-                <input id=1 type="text" class="small-input"
-                       name="tail1">
-                <input id=1 type="text" class="small-input"
-                       name="tail2">
-                <input id=1 type="text" class="small-input"
-                       name="tail3">
-                <input id=1 type="text" class="small-input"
-                       name="tail4">
+                {{ beautiful_tail_form.number1 }}
+                {{ beautiful_tail_form.number2 }}
+                {{ beautiful_tail_form.number3 }}
+                {{ beautiful_tail_form.number4 }}
             </div>
-            <div class="form-group">
                 <button class="btn btn-green float-left"
                         type="submit">Подобрать
                 </button>
                 <img src="{% static 'choose_phone/img/icons/xvost.png' %}"
                      class="float-right img-medium" alt="">
-            </div>
         </form>
     </div>
 </div>

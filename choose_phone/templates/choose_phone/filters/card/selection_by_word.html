@@ -9,8 +9,8 @@
         <form action="{% url 'filter' 4 %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="1">Введите маску:</label>
-                <input id=1 type="text" class="form-control" name="word">
+                <label>{{ selection_by_word_form.word.label }}</label>
+                {{ selection_by_word_form.word }}
             </div>
             <div class="form-group">
                 <button class="btn btn-green float-left" type="submit">Подобрать

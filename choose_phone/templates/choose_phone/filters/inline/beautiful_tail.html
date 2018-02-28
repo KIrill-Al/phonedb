@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<form action="{% url 'filter' 3 %}" method="post">
+    <div class="row">
+        <p>Подберите себе оригинальный номер телефона по последним цифрам.</p>
+    </div>
+    <div class="row">
+        {% csrf_token %}
+        <div class="col-auto">
+
+            <label for="1" class="col-sm-12">Введите 4
+                цифры</label>
+            (
+            <input id=1 type="text" class="small-input disabled"
+                   value="X" disabled>
+            <input id=1 type="text" class="small-input disabled"
+                   value="X" disabled>
+            <input id=1 type="text" class="small-input disabled"
+                   value="X" disabled>
+            )
+            <input id=1 type="text" class="small-input disabled"
+                   value="X" disabled>
+            <input id=1 type="text" class="small-input disabled"
+                   value="X" disabled>
+            <input id=1 type="text" class="small-input disabled"
+                   value="X" disabled>
+            -
+            {{ form.number1 }}
+            {{ form.number2 }}
+            {{ form.number3 }}
+            {{ form.number4 }}
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-green float-left margin-bottom"
+                    type="submit">Подобрать
+            </button>
+        </div>
+    </div>
+</form>

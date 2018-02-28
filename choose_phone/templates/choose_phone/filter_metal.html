@@ -36,26 +36,16 @@
                                 <ul class="list-group">
                                     {% for number in metal %}
                                         <li class="list-group-item">{{ number }}
-                                            <span class="float-right">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            </span>
+                                            <div class="btn-right-part">
+                                                    <img src="{% static 'choose_phone/img/icons/cart.png' %}"
+                                                         class="btn-img-cart">
+                                                </div>
                                         </li>
                                     {% endfor %}
                                 </ul>
                             </div>
                         </div>
                     <hr>
-                    {#                    <div class="row">#}
-                    {#                        <div class="col-sm-12">#}
-                    {#                            <h3>Городские ({{ count_city_numbers }})</h3>#}
-                    {#                        </div>#}
-                    {#                        <div class="col-sm-2">Простые ({{ simple_numbers }})#}
-                    {#                        </div>#}
-                    {#                        <div class="col-sm-2">Серебрянные#}
-                    {#                            ({{ silver_numbers }})#}
-                    {#                        </div>#}
-                    {#                        <div class="col-sm-2">Платиновые ({{ platinum_numbers }})</div>#}
-                    {#                    </div>#}
                 </div>
             </div>
         </div>

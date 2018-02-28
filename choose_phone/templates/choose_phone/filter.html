@@ -30,7 +30,7 @@
                 <div class="card-row">
                     <ul class="list-inline">
                         <li class="list-inline-item menu-item menu-item-first {% if id == 1 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 1 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/mini_full.png' %}"
                                          class="btn-img">
@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item {% if id == 2 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 2 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/lubnum.png' %}"
                                          class="btn-img">
@@ -60,7 +60,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item {% if id == 3 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 3 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/xvost.png' %}"
                                          class="btn-img">
@@ -75,7 +75,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item {% if id == 4 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 4 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/namednum.png' %}"
                                          class="btn-img">
@@ -90,7 +90,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item {% if id == 5 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 5 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/mini_datenum.png' %}"
                                          class="btn-img">
@@ -105,7 +105,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item menu-item-first {% if id == 6 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 6 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/mini_exceptnum.png' %}"
                                          class="btn-img">
@@ -120,7 +120,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item {% if id == 7 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 7 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/mini_alikenum.png' %}"
                                          class="btn-img">
@@ -135,7 +135,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item {% if id == 8 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 8 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/mini_mchislo.png' %}"
                                          class="btn-img">
@@ -150,7 +150,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item menu-item {% if id == 9 %}green-border{% endif %}">
-                            <a href="#" class="menu-item-block">
+                            <a href="{% url 'filter' 9 %}" class="menu-item-block">
                                 <div class="btn-left-part">
                                     <img src="{% static 'choose_phone/img/icons/mini_masknum.png' %}"
                                          class="btn-img">
@@ -170,93 +170,89 @@
                     {% include embedded_template %}
                 </div>
                 <hr>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h3>Федеральные ({{ count_all }})</h3>
-                                    </div>
-                                    {% if count_all == 0 %}
-                                        <div class="col-sm-12">К сожалению
-                                            номеров
-                                            удовлетворяющих критериям поиска не
-                                            найдено
-                                        </div>
-                                    {% endif %}
-                                    {% if simple %}
-                                        <div class="col-sm-3"><h4
-                                                class="simple"><a
-                                                href="{% url 'filter_metal' id 'simple' %}">Простые
-                                            ({{ count_simple }})</a></h4>
-                                            <div class="row"><h4 class="green">0
-                                                &#8381;</h4>
-                                            </div>
-                                            <div class="row">
-                                                <ul class="list-group">
-                                                    {% for number in simple %}
-                                                        <li class="list-group-item">{{ number }}
-                                                            <span class="float-right">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                    {% if silver %}
-                                        <div class="col-sm-3"><h4
-                                                class="silver"><a
-                                                href="{% url 'filter_metal' id 'silver' %}">Серебрянные
-                                            ({{ count_silver }})</a></h4>
-                                            <div class="row"><h4 class="green">
-                                                500
-                                                &#8381;</h4>
-                                            </div>
-                                            <div class="row">
-                                                <ul class="list-group">
-                                                    {% for number in silver %}
-                                                        <li class="list-group-item">{{ number }}
-                                                            <span class="float-right">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                    {% if platinum %}
-                                        <div class="col-sm-3"><h4
-                                                class="platinum"><a
-                                                href="{% url 'filter_metal' id 'platinum' %}">Платиновые
-                                            ({{ count_platinum }})</a></h4>
-                                            <div class="row"><h4 class="green">
-                                                3000
-                                                &#8381;</h4>
-                                            </div>
-                                            <div class="row">
-                                                <ul class="list-group">
-                                                    {% for number in platinum %}
-                                                        <li class="list-group-item">{{ number }}
-                                                            <span class="float-right">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            </span>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    {% endif %}
-                                <hr>
-                            </div>
-                        </div>
+                <div class="card-row">
+                    <div class="row">
+                        <h3>Федеральные ({{ count_all }})</h3>
                     </div>
+                    {% if count_all == 0 %}
+                        <div class="row">К сожалению
+                            номеров
+                            удовлетворяющих критериям поиска не
+                            найдено
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        {% if simple %}
+                            <div class="col-sm-3"><h4
+                                    class="simple"><a
+                                    href="{% url 'filter_metal' id 'simple' %}">Простые
+                                ({{ count_simple }})</a></h4>
+                                <div class="row"><h4 class="green">0
+                                    &#8381;</h4>
+                                </div>
+                                <div class="row">
+                                    <ul class="list-group">
+                                        {% for number in simple %}
+                                            <li class="list-group-item">{{ number }}
+                                                <div class="btn-right-part">
+                                                    <img src="{% static 'choose_phone/img/icons/cart.png' %}"
+                                                         class="btn-img-cart">
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if silver %}
+                            <div class="col-sm-3"><h4
+                                    class="silver"><a
+                                    href="{% url 'filter_metal' id 'silver' %}">Серебрянные
+                                ({{ count_silver }})</a></h4>
+                                <div class="row"><h4 class="green">
+                                    500
+                                    &#8381;</h4>
+                                </div>
+                                <div class="row">
+                                    <ul class="list-group">
+                                        {% for number in silver %}
+                                            <li class="list-group-item">{{ number }}
+                                                <div class="btn-right-part">
+                                                    <img src="{% static 'choose_phone/img/icons/cart.png' %}"
+                                                         class="btn-img-cart">
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if platinum %}
+                            <div class="col-sm-3"><h4
+                                    class="platinum"><a
+                                    href="{% url 'filter_metal' id 'platinum' %}">Платиновые
+                                ({{ count_platinum }})</a></h4>
+                                <div class="row"><h4 class="green">
+                                    3000
+                                    &#8381;</h4>
+                                </div>
+                                <div class="row">
+                                    <ul class="list-group">
+                                        {% for number in platinum %}
+                                            <li class="list-group-item">{{ number }}
+                                                <div class="btn-right-part">
+                                                    <img src="{% static 'choose_phone/img/icons/cart.png' %}"
+                                                         class="btn-img-cart">
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        {% endif %}
+                    <hr>
                 </div>
-
             </div>
         </div>
 {% endblock %}

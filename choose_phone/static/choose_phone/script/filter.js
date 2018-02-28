@@ -1,8 +1,14 @@
 $(document).ready(function () {
     $(".onlyNumber").keypress(function (e) {
-        console.log(e.which);
         if (e.which < 48 || e.which > 57) {
             return false;
+        }
+    });
+    $(".small-input").keyup(function () {
+        console.log(this.maxLength);
+        console.log(this.value.length);
+        if (this.value.length === this.maxLength) {
+            $(this).next('.small-input').focus();
         }
     });
     // $('.submitForm').submit(function (event) {

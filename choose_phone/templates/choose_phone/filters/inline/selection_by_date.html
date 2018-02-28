@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<form action="{% url 'filter' 5 %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <p class="card-text">Номер, содержащий цифры важной для
+            вас даты, например, дня рождения или свадьбы.</p>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <label for="2" class="col-sm-12">Введите
+                дату:</label>
+            <select name="" id="2" class="small-select">
+                <option value="">1</option>
+            </select>
+            <select name="" id="2"
+                    class="small-select"></select>
+            <select name="" id="2"
+                    class="small-select"></select>
+        </div>
+
+        <div class="col-auto">
+            <button class="btn btn-green float-left margin-bottom"
+                    type="submit">Подобрать
+            </button>
+        </div>
+    </div>
+</form>
