@@ -10,10 +10,8 @@
         <form action="{% url 'filter' 6 %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="2" class="col-sm-12">Введите до 4
-                    цифр:</label>
-                <input id=2 type="text" class="form-control"
-                       name="number">
+                <label class="col-sm-12">{{ all_except_number_form.number.label }}</label>
+                {{ all_except_number_form.number }}
             </div>
             <div class="form-group">
                 <button class="btn btn-green float-left"

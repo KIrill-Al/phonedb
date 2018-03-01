@@ -47,7 +47,7 @@
             {% include 'choose_phone/filters/card/all_except_number.html' %}
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            {% include 'choose_phone/filters/card/all_except_number.html' %}
+            {% include 'choose_phone/filters/card/similar_number.html' %}
         </div>
     </div>
     <div class="row">
@@ -58,9 +58,4 @@
             {% include 'choose_phone/filters/card/mask.html' %}
         </div>
     </div>
-
-    {% block script %}
-        <script defer
-                src="{% static 'choose_phone/script/filter.js' %}"></script>
-    {% endblock %}
 {% endblock %}

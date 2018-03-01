@@ -17,9 +17,9 @@ TEMPLATES_DICT = {1: 'choose_phone/filters/inline/all.html',
                   3: 'choose_phone/filters/inline/beautiful_tail.html',
                   4: 'choose_phone/filters/inline/selection_by_word.html',
                   5: 'choose_phone/filters/inline/selection_by_date.html',
-                  6: 'choose_phone/filters/inline/favorite_number.html',
-                  7: 'choose_phone/filters/inline/favorite_number.html',
-                  8: 'choose_phone/filters/inline/favorite_number.html',
+                  6: 'choose_phone/filters/inline/all_except_number.html',
+                  7: 'choose_phone/filters/inline/similar_number.html',
+                  8: 'choose_phone/filters/inline/magic_number.html',
                   9: 'choose_phone/filters/inline/favorite_number.html'}
 
 
@@ -30,10 +30,16 @@ def index(request):
     beautiful_tail_form = BeautifulTailForm
     selection_by_word_form = SelectionByWordForm
     selection_by_date_form = SelectionByDateForm
+    all_except_number_form = AllExceptNumberForm
+    similar_number_form = SimilarNumberForm
+    magic_number_form = MagicNumberForm
     context = {'count': count, 'favorite_number_form': favorite_number_form,
                'beautiful_tail_form': beautiful_tail_form,
                'selection_by_word_form': selection_by_word_form,
-               'selection_by_date_form': selection_by_date_form}
+               'selection_by_date_form': selection_by_date_form,
+               'all_except_number_form': all_except_number_form,
+               'similar_number_form': similar_number_form,
+               'magic_number_form': magic_number_form}
     return render(request, template, context)
 
 
@@ -89,8 +95,8 @@ def selection_by_word(request, form=None):
         word = tuple(form.cleaned_data['word'])
     else:
         word = ''
-    number = ''
 
+    number = ''
     for char in word:
         for key, char_list in numpad.items():
             if char in char_list:
@@ -119,35 +125,24 @@ def selection_by_date(request, form):
         month = ''
         year = ''
 
-    print(day)
-    print(month)
-    print(year)
     regex1 = ''
     regex2 = ''
     regex_pattern1 = r'{:0>2}{:0>2}{}$'
     regex_pattern2 = r'{:0>2}{:0>2}'
     if day and month and year:
-        print('first')
         regex1 = regex_pattern1.format(day, month, year[-2:])
     elif day and month:
-        print('second')
         regex1 = regex_pattern2.format(day, month)
         regex2 = regex_pattern2.format(month, day)
-        print(regex1)
-        print(regex2)
     elif month and year:
-        print('third')
-        regex1 = regex_pattern2.format(month, year[:-2])
-        regex2 = regex_pattern2.format(year[:-2], month)
+        regex1 = regex_pattern2.format(month, year[-2:])
+        regex2 = regex_pattern2.format(year[-2:], month)
 
     if regex2:
-        print('regex2')
         phones = Phone.objects.filter(
             Q(number__iregex=regex1) | Q(number__iregex=regex2)).all()
     else:
-        print('regex1')
         phones = Phone.objects.filter(Q(number__iregex=regex1)).all()
-    print(phones)
     text = "Подберите номер, содержащий цифры важной для вас даты, например, " \
            "дня рождения или свадьбы. Просто укажите число, месяц, год и " \
            "выберите подходящий вам номер."
@@ -156,7 +151,11 @@ def selection_by_date(request, form):
 
 
 def all_except_number(request, form):
-    phone, text = favorite_number(request, negative=True)
+    if form.is_valid():
+        number = form.cleaned_data['number']
+    else:
+        number = ''
+    phone, text = favorite_number(request, negative=True, number=number)
     text = 'Европейцы избегают числа «13», японцы — «4», а у вас есть нелюбимая ' \
            'цифра или число? Введите его в форму и уберите из списка все номера, ' \
            'содержащие неприятные комбинации.'
@@ -165,22 +164,16 @@ def all_except_number(request, form):
 
 
 def similar_number(request, form):
-    number1 = request.POST['number1']
-    number2 = request.POST['number2']
-    number3 = request.POST['number3']
-    number4 = request.POST['number4']
-    number5 = request.POST['number5']
-    number6 = request.POST['number6']
-    number7 = request.POST['number7']
-    number1 = number1 if number1 else '.'
-    number2 = number2 if number2 else '.'
-    number3 = number3 if number3 else '.'
-    number4 = number4 if number4 else '.'
-    number5 = number5 if number5 else '.'
-    number6 = number6 if number6 else '.'
-    number7 = number7 if number7 else '.'
-    regex = r'{}{}{}{}{}{}{}$'.format(number1, number2, number3, number4,
-                                      number5, number6, number7)
+    form.is_valid()
+    number = ''
+    for key, value in form.cleaned_data.items():
+        number += '[' + value + ']'
+
+    regex = r'({}|{}|{}|{}|{}|{}|{}|{})'.format(number, number[:-3],
+                                                number[:-6], number[:12],
+                                                number[6:],
+                                                number[3:-6], number[6:-3],
+                                                number[-12:])
     text = "Этот способ поможет вам подобрать один или несколько номеров, " \
            "похожих на тот, который вы укажете. Подобранные номера могут " \
            "содержать те же цифры, расположенные в другом порядке или отличаться " \
@@ -191,7 +184,17 @@ def similar_number(request, form):
 
 
 def magic_number(request, form):
-    pass
+    form.is_valid()
+    number = form.cleaned_data['magic_number']
+    phone, text = favorite_number(request, number=number)
+    text = "Узнайте свое магическое число по дате рождения и подберите " \
+           "телефонный номер, основываясь на принципах науки нумерологии. " \
+           "Воспользовавшись формой, приведенной ниже, вы можете рассчитать " \
+           "ваше магическое число и подобрать номер телефона так, чтобы сумма " \
+           "цифр вашего номера равнялась вашему магическому числу. " \
+           "Мы надеемся, что это принесет вам удачу!"
+
+    return phone, text
 
 
 def mask(request, form):

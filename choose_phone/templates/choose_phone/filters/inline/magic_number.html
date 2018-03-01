@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<form action="{% url 'filter' 8 %}" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <p>{{ text }}</p>
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <label class="col-sm-12">{{ form.magic_day.label }}</label>
+            {{ form.magic_day }}
+            {{ form.magic_month }}
+            {{ form.magic_year }}
+            =
+            {{ form.magic_number }}
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-green float-left" type="submit">Подобрать
+            </button>
+        </div>
+    </div>
+</form>

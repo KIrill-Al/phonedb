@@ -130,6 +130,7 @@ input.form-control {
     border-radius: .25rem;
     background-color: #fff;
     background-image: none;
+    display: inline-block;
 }
 
 .btn-default {

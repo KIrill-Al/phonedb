@@ -1,19 +1,18 @@
 {% load staticfiles %}
-<form action="{% url 'filter' 4 %}" method="post">
+<form action="{% url 'filter' 6 %}" method="post">
     {% csrf_token %}
     <div class="row">
-        <p>Номер, который легко запомнить в виде имени, названия или любого
-            слова.</p>
+        <p>{{ text }}</p>
     </div>
     <div class="row">
         <div class="col-auto">
-            <label>{{ form.word.label }}</label>
-            {{ form.word }}
+            <label class="col-sm-12">{{ form.number.label }}</label>
+            {{ form.number }}
         </div>
         <div class="col-auto">
             <button class="btn btn-green float-left margin-bottom"
                     type="submit">Подобрать
             </button>
         </div>
+    </div>
 </form>
-
