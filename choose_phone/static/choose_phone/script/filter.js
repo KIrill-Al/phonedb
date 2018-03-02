@@ -15,9 +15,6 @@ $(document).ready(function () {
         magic_day = $("#id_magic_day").val();
         magic_month = $("#id_magic_month").val();
         magic_year = $("#id_magic_year").val();
-        console.log(magic_day);
-        console.log(magic_month);
-        console.log(magic_year);
         if (magic_day && magic_month && magic_year) {
             result = magic_day + magic_month + magic_year;
             result_length = result.length;
@@ -28,13 +25,24 @@ $(document).ready(function () {
                 }
                 result = new_result.toString();
                 result_length = result.length;
-                console.log(result);
-                console.log(result_length);
-                console.log(new_result);
             }
             $("#id_magic_number").val(new_result)
         }
-    })
+    });
+
+    $("#magic_form").submit(function (event) {
+        magic_day = $("#id_magic_day").val();
+        magic_month = $("#id_magic_month").val();
+        magic_year = $("#id_magic_year").val();
+        console.log('magic_button clicked');
+        if (magic_day === 'День' || magic_month === 'Месяц' || magic_month === 'Год') {
+            event.preventDefault();
+            alert("Для поиска по магическому числу необходимо обязательно выбрать день, месяц и год вашего рождения")
+        } else {
+            console.log('all ok')
+        }
+    });
+
     // $('.submitForm').submit(function (event) {
     //
     //     const formData = $(this).serialize();

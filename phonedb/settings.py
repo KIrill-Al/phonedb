@@ -8,6 +8,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 INSTALLED_APPS = [
     'choose_phone.apps.ChoosePhoneConfig',
     'django.contrib.admin',

@@ -118,16 +118,18 @@ class MagicNumberForm(forms.Form):
     magic_day = forms.ChoiceField(
         label="Укажите дату рождения и узнайте своё магическое число:",
         widget=forms.Select(
-            attrs={'class': 'small-select magic'}), choices=day_choices)
+            attrs={'class': 'small-select magic'}), choices=day_choices,
+        required=False)
     magic_month = forms.ChoiceField(
         widget=forms.Select(attrs={'class': 'small-select magic'}),
-        choices=month_choices)
+        choices=month_choices, required=False)
     magic_year = forms.ChoiceField(
         widget=forms.Select(attrs={'class': 'small-select magic'}),
-        choices=year_choices)
+        choices=year_choices, required=False)
     magic_number = forms.CharField(
         widget=forms.TextInput(
-            attrs={'class': 'small-input', 'readonly': 'readonly'}))
+            attrs={'class': 'small-input', 'readonly': 'readonly'}),
+        required=False)
 
 
 class MaskForm(forms.Form):

@@ -65,24 +65,24 @@ def favorite_number(request, number=None, negative=False, form=None):
 
 def beautiful_tail(request, form=None):
     if form.is_valid():
-        number1 = form.cleaned_data['number1']
-        number2 = form.cleaned_data['number2']
-        number3 = form.cleaned_data['number3']
-        number4 = form.cleaned_data['number4']
+        number1 = form.cleaned_data['number1'] if form.cleaned_data[
+            'number1'] else '.'
+        number2 = form.cleaned_data['number2'] if form.cleaned_data[
+            'number2'] else '.'
+        number3 = form.cleaned_data['number3'] if form.cleaned_data[
+            'number3'] else '.'
+        number4 = form.cleaned_data['number4'] if form.cleaned_data[
+            'number4'] else '.'
+        regex = r'{}{}{}{}$'.format(number1, number2, number3, number4)
+        text = "При помощи этого способа вы можете подобрать номер по последним " \
+               "четырем цифрам. Вы можете ввести от одной до четырех цифр. Если " \
+               "цифра в каком-то поле не имеет для вас значения, оставьте поле " \
+               "свободным. Укажите от одной до четырех цифр в окончании номера:"
+        phones = Phone.objects.filter(Q(number__iregex=regex)).all()
+
+        return phones, text
     else:
-        number1 = '.'
-        number2 = '.'
-        number3 = '.'
-        number4 = '.'
-
-    regex = r'{}{}{}{}$'.format(number1, number2, number3, number4)
-    text = "При помощи этого способа вы можете подобрать номер по последним " \
-           "четырем цифрам. Вы можете ввести от одной до четырех цифр. Если " \
-           "цифра в каком-то поле не имеет для вас значения, оставьте поле " \
-           "свободным. Укажите от одной до четырех цифр в окончании номера:"
-    phones = Phone.objects.filter(Q(number__iregex=regex)).all()
-
-    return phones, text
+        return None
 
 
 def selection_by_word(request, form=None):
@@ -184,17 +184,22 @@ def similar_number(request, form):
 
 
 def magic_number(request, form):
-    form.is_valid()
-    number = form.cleaned_data['magic_number']
-    phone, text = favorite_number(request, number=number)
-    text = "Узнайте свое магическое число по дате рождения и подберите " \
-           "телефонный номер, основываясь на принципах науки нумерологии. " \
-           "Воспользовавшись формой, приведенной ниже, вы можете рассчитать " \
-           "ваше магическое число и подобрать номер телефона так, чтобы сумма " \
-           "цифр вашего номера равнялась вашему магическому числу. " \
-           "Мы надеемся, что это принесет вам удачу!"
+    if form.is_valid():
+        print('form is valid')
+        number = form.cleaned_data['magic_number']
+        phone, text = favorite_number(request, number=number)
+        text = "Узнайте свое магическое число по дате рождения и подберите " \
+               "телефонный номер, основываясь на принципах науки нумерологии. " \
+               "Воспользовавшись формой, приведенной ниже, вы можете рассчитать " \
+               "ваше магическое число и подобрать номер телефона так, чтобы сумма " \
+               "цифр вашего номера равнялась вашему магическому числу. " \
+               "Мы надеемся, что это принесет вам удачу!"
 
-    return phone, text
+        return phone, text
+    else:
+        print('form is not valid')
+        print(form.errors)
+        return None
 
 
 def mask(request, form):

@@ -1,11 +1,11 @@
 {% load staticfiles %}
-<form action="{% url 'filter' 8 %}" method="post">
+<form action="{% url 'filter' 8 %}" method="post" id="magic_form">
     {% csrf_token %}
     <div class="row">
         <p>{{ text }}</p>
     </div>
     <div class="row">
-        <div class="col-auto">
+        <div class="col-sm-4">
             <label class="col-sm-12">{{ form.magic_day.label }}</label>
             {{ form.magic_day }}
             {{ form.magic_month }}
@@ -14,7 +14,9 @@
             {{ form.magic_number }}
         </div>
         <div class="col-auto">
-            <button class="btn btn-green float-left" type="submit">Подобрать
+            <button id="magic_button"
+                    class="btn btn-green float-left margin-bottom"
+                    type="submit">Подобрать
             </button>
         </div>
     </div>
